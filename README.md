@@ -1,6 +1,6 @@
 # Dogs API
 
-The dogs api tracks dogs and their associated breeds via `/dogs` and `/breeds` endpoints.  It is a RESTful HTTP based api using JSON to represent the dogs and breeds. 
+The dogs api tracks dogs and their associated breeds via [`/dogs`](#dogs) and [`/breeds`](#breeds) endpoints.  It is a RESTful HTTP based api using JSON to represent the dogs and breeds.
 
 ## Getting Started
 
