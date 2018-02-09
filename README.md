@@ -35,18 +35,13 @@ POST /dogs
 }
 ```
 
-A successfully created dog will result in a `201 - Created` response and the dog document will be returned in the response body.  The response body will include an `_id`, `_rev`, and `type` properties.  
+A successfully created dog will result in a `201 - Created` response code and a response body which includes an `id`, `rev`, and `ok` properties.  
 
 ```
 {
-  "_id": "dog_tucker-t",
-  "_rev": "1-sdklfjkl3492492iwjer9wu"
-  "name": "Tucker T",
-  "age": 9,
-  "gender": "male",
-  "color": "brown"
-  "breedId": "breed_hound",
-  "type": "dog"
+  "ok": true,
+  "id": "dog_tucker-t",
+  "rev": "1-A6157A5EA545C99B00FF904EEF05FD9F"
 }
 ```
 
@@ -96,22 +91,15 @@ PUT /dogs/dog_tucker-t
 }
 ```
 
-A successful response would include an updated `_rev` value:
+A successfully updated dog will result in a `200 - OK` response code and a response body which includes an `id`, `rev`, and `ok` properties.  A successful response would include an updated `rev` value.
 
 ```
 {
-  "_id": "dog_tucker-t",
-  "_rev": "2-sdfsdfwerwsfdfsdfsdf343sd3"
-  "name": "Tucker T",
-  "age": 10,
-  "gender": "male",
-  "color": "brown"
-  "breedId": "breed_hound",
-  "type": "dog"
+  "ok": true,
+  "id": "dog_tucker-t",
+  "rev": "2-A7157A5EA545C99B00FF904EEF05FGGG"
 }
 ```
-
-
 
 ## Delete a dog
 
@@ -154,18 +142,16 @@ POST /breeds
 }
 ```
 
-A successfully created breed will result in a `201 - Created` response and the breed document will be returned in the response body.  The response body will include an `_id` and `_rev` properties.  
+A successfully created breed will result in a `201 - Created` response code and a response body which includes an `id`, `rev`, and `ok` properties.  
 
 ```
 {
-  "_id": "breed_german-shepherd",
-  "_rev": "1-kej3jwkd3343k4jksjskr"
-  "name": "German Shepherd",
-  "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
-  "country": "Germany",
-  "type": "breed"
+  "ok": true,
+  "id": "breed_german-shepherd",
+  "rev": "1-A7157A5EA545C99B00FF904EEF05FDFD9"
 }
 ```
+
 
 ## Get a breed  
 
@@ -210,16 +196,13 @@ PUT /breeds/breed_german-shepherd
 }
 ```
 
-A successful response would include an updated `_rev` value:
+A successfully updated breed will result in a `200 - OK` response code and a response body which includes an `id`, `rev`, and `ok` properties.  A successful response would include an updated `rev` value.
 
 ```
 {
-  "_id": "breed_german-shepherd",
-  "_rev": "2-34erwer423423werwrwer"
-  "name": "German Shepherd",
-  "desc": "The German Shepherd Dog is great.",
-  "country": "Germany",
-  "type": "breed"
+  "ok": true,
+  "id": "breed_german-shepherd",
+  "rev": "2-A7157A5EA545C99B00FF904EEF05FDFD9"
 }
 ```
 
