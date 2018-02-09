@@ -1,10 +1,12 @@
 {
   "name": "dogs-api",
   "version": "1.0.0",
-  "description": "The dogs api tracks dogs and their associated breeds via [`/dogs`](#dogs) and [`/breeds`](#breeds) endpoints.  It is a RESTful HTTP based api using JSON to represent the dogs and breeds.",
+  "description":
+    "The dogs api tracks dogs and their associated breeds via [`/dogs`](#dogs) and [`/breeds`](#breeds) endpoints.  It is a RESTful HTTP based api using JSON to represent the dogs and breeds.",
   "main": "api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api.js"
   },
   "repository": {
     "type": "git",
