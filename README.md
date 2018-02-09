@@ -21,6 +21,8 @@ The dogs api allows the following HTTP verbs. :
 
 Create a dog via a `POST` to the `/dogs` route passing a dog JSON object in the request body. 
 
+All fields are required fields including `name`, `age`, `gender`, `color`, `breedId`.
+
 ```
 POST /dogs
 
@@ -29,12 +31,11 @@ POST /dogs
   "age": 9,
   "gender": "male",
   "color": "brown"
-  "breedId": "breed_hound",
-  "type": "dog"
+  "breedId": "breed_hound"
 }
 ```
 
-A successfully created dog will result in a `201 - Created` response and the dog document will be returned in the response body.  The response body will include an `_id` and `_rev` properties.  
+A successfully created dog will result in a `201 - Created` response and the dog document will be returned in the response body.  The response body will include an `_id`, `_rev`, and `type` properties.  
 
 ```
 {
@@ -48,7 +49,6 @@ A successfully created dog will result in a `201 - Created` response and the dog
   "type": "dog"
 }
 ```
-
 
 ## Get a dog  
 
@@ -74,6 +74,44 @@ A successful response will result in a `200 - OK` response code and the dog will
 ```
 
 ## Update a dog
+
+Updates a dog within the collection of dogs via a `PUT` to the `/dogs/:id` route by completely replacing the dog. Provide a representation of a dog in the request body.  
+
+> Tip:  Be sure to provide the most recent `_rev` value in the request body. Otherwise, you will receive an `409 - Conflict` error. 
+
+All fields are required fields including `_id`, `_rev`, `name`, `age`, `gender`, `color`, `breedId`, `type`.
+
+```
+PUT /dogs/dog_tucker-t
+
+{
+  "_id": "dog_tucker-t",
+  "_rev": "1-sdklfjkl3492492iwjer9wu"
+  "name": "Tucker T",
+  "age": 10,
+  "gender": "male",
+  "color": "brown"
+  "breedId": "breed_hound",
+  "type": "dog"
+}
+```
+
+A successful response would include an updated `_rev` value:
+
+```
+{
+  "_id": "dog_tucker-t",
+  "_rev": "2-sdfsdfwerwsfdfsdfsdf343sd3"
+  "name": "Tucker T",
+  "age": 10,
+  "gender": "male",
+  "color": "brown"
+  "breedId": "breed_hound",
+  "type": "dog"
+}
+```
+
+
 
 ## Delete a dog
 
@@ -104,14 +142,15 @@ A successful response would result in a `200 - OK`.  The response body will cont
 
 Create a dog via a `POST` to the `/breeds` route passing a breed JSON object in the request body. 
 
+All fields are required fields including `name`, `desc`, and `country`.
+
 ```
 POST /breeds
 
 {
   "name": "German Shepherd",
   "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
-  "country": "Germany",
-  "type": "breed"
+  "country": "Germany"
 }
 ```
 
@@ -152,6 +191,37 @@ A successful response will result in a `200 - OK` response code and the breed wi
 
 ## Update a breed
 
+Updates a dog within the collection of dogs via a `PUT` to the `/dogs/:id` route by completely replacing the dog. Provide a representation of a dog in the request body.  
+
+> Tip:  Be sure to provide the most recent `_rev` value in the request body. Otherwise, you will receive an `409 - Conflict` error. 
+
+All fields are required fields including `_id`, `_rev`, `name`, `desc`, `country`, `type`.
+
+```
+PUT /breeds/breed_german-shepherd
+
+{
+  "_id": "breed_german-shepherd",
+  "_rev": "1-kej3jwkd3343k4jksjskr"
+  "name": "German Shepherd",
+  "desc": "The German Shepherd Dog is great.",
+  "country": "Germany",
+  "type": "breed"
+}
+```
+
+A successful response would include an updated `_rev` value:
+
+```
+{
+  "_id": "breed_german-shepherd",
+  "_rev": "2-34erwer423423werwrwer"
+  "name": "German Shepherd",
+  "desc": "The German Shepherd Dog is great.",
+  "country": "Germany",
+  "type": "breed"
+}
+```
 
 ## Delete a breed
 
