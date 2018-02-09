@@ -50,6 +50,49 @@ A successfully created dog will result in a `201 - Created` response and the dog
 ```
 
 
+## Get a dog  
+
+Retrieves a single dog from the collection of dogs using a `GET` to the `/dogs/:id` route.
+
+```
+GET /dogs/dog_tucker-t
+```
+
+A successful response will result in a `200 - OK` response code and the dog will be returned in the response body:
+
+```
+{
+  "_id": "dog_tucker-t",
+  "_rev": "1-sdklfjkl3492492iwjer9wu"
+  "name": "Tucker T",
+  "age": 9,
+  "gender": "male",
+  "color": "brown"
+  "breedId": "breed_hound",
+  "type": "dog"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Create a breed
 
 Create a dog via a `POST` to the `/breeds` route passing a breed JSON object in the request body. 
@@ -72,9 +115,29 @@ A successfully created breed will result in a `201 - Created` response and the b
   "_id": "breed_german-shepherd",
   "_rev": "1-kej3jwkd3343k4jksjskr"
   "name": "German Shepherd",
-   "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
+  "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
   "country": "Germany",
   "type": "breed"
 }
 ```
 
+## Get a breed  
+
+Retrieves a single breed from the collection of breeds using a `GET` to the `/breeds/:id` route.
+
+```
+GET /breeds/breed_german-shepherd
+```
+
+A successful response will result in a `200 - OK` response code and the breed will be returned in the response body:
+
+```
+{
+  "_id": "breed_german-shepherd",
+  "_rev": "1-kej3jwkd3343k4jksjskr"
+  "name": "German Shepherd",
+  "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
+  "country": "Germany",
+  "type": "breed"
+}
+```
