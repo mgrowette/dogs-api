@@ -73,25 +73,7 @@ A successful response will result in a `200 - OK` response code and the dog will
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Breeds
 
 ## Create a breed
 
