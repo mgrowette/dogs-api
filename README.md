@@ -6,7 +6,7 @@ The dogs api tracks dogs and their associated breeds via `/dogs` and `/breeds` e
 
 ## HTTP Verbs
 
-The dogs api allows the following HTTP verbs:
+The dogs api allows the following HTTP verbs. :
 
 - `GET`
 - `POST`
@@ -73,6 +73,31 @@ A successful response will result in a `200 - OK` response code and the dog will
 }
 ```
 
+## Update a dog
+
+## Delete a dog
+
+Delete a dog from the collection of dogs via a `DELETE` to the `/dogs/:id` route. 
+
+```
+DELETE /dogs/dog_tucker-t
+```
+
+A successful response would result in a `200 - OK`.  The response body will contain the following:
+
+```
+{
+  "ok": true,
+  "id": "dog_tucker-t",
+  "rev": "2-9AF304BE281790604D1D8A4B0F4C9ADB"
+}
+```
+
+
+
+
+
+
 ## Breeds
 
 ## Create a breed
@@ -121,5 +146,27 @@ A successful response will result in a `200 - OK` response code and the breed wi
   "desc": "The German Shepherd Dog is one of America's most popular dog breeds — for good reason. He's an intelligent and capable working dog. His devotion and courage are unmatched. And he's amazingly versatile, excelling at most anything he's trained to do: guide and assistance work for the handicapped, police and military.",
   "country": "Germany",
   "type": "breed"
+}
+```
+
+
+## Update a breed
+
+
+## Delete a breed
+
+Delete a breed from the collection of breeds via a `DELETE` to the `/breeds/:id` route. 
+
+```
+DELETE /breeds/breed_german-shepherd
+```
+
+A successful response would result in a `200 - OK`.  The response body will contain the following:
+
+```
+{
+  "ok": true,
+  "id": "breed_german-shepherd",
+  "rev": "2-dfsd4425fdsdfwesdfsdf"
 }
 ```
