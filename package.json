@@ -6,7 +6,8 @@
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node api.js"
+    "start": "node api.js",
+    "load": "node bulk-import.js"
   },
   "repository": {
     "type": "git",
