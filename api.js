@@ -31,7 +31,23 @@ app.get('/dogs/:id', (req, res, next) => {
 })
 
 app.get('/dogs', (req, res, next) => {
-  const options = { include_docs: true }
+  const options = {
+    include_docs: true,
+    start_key: 'dog_',
+    end_key: 'dog_\ufff0'
+  }
+
+  jennifer(options)
+    .then(docs => res.send(docs))
+    .catch(errNextr(next))
+})
+
+app.get('/breeds', (req, res, next) => {
+  const options = {
+    include_docs: true,
+    start_key: 'breed_',
+    end_key: 'breed_\ufff0'
+  }
 
   jennifer(options)
     .then(docs => res.send(docs))
