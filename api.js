@@ -6,7 +6,7 @@ const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const { head, last, split, filter, pathOr } = require('ramda')
 const { getDoc, deleteDoc, createDog, jennifer } = require('./dal')
-
+const docFilter = require('./lib/doc-filter')
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
@@ -31,18 +31,6 @@ app.get('/dogs/:id', (req, res, next) => {
 })
 
 app.get('/dogs', (req, res, next) => {
-  var filterFn = null
-
-  if (pathOr(null, ['query', 'q'], req)) {
-    const filterProp = head(split(':', req.query.q)) // age
-    const filterValue = last(split(':', req.query.q)) // 65
-
-    filterFn = docs =>
-      res.status(200).send(filter(doc => doc[filterProp] == filterValue, docs))
-  } else {
-    filterFn = docs => res.status(200).send(docs)
-  }
-
   const options = {
     include_docs: true,
     start_key: 'dog_',
@@ -50,7 +38,7 @@ app.get('/dogs', (req, res, next) => {
   }
 
   jennifer(options)
-    .then(filterFn)
+    .then(docFilter(req, res))
     .catch(errNextr(next))
 })
 
@@ -60,15 +48,14 @@ app.get('/breeds', (req, res, next) => {
     start_key: 'breed_',
     end_key: 'breed_\ufff0'
   }
-
   jennifer(options)
-    .then(docs => res.send(docs))
+    .then(docFilter(req, res))
     .catch(err => errNextr(next))
 })
 
 app.get('/breeds/:id', (req, res, next) => {
   getDoc(req.params.id)
-    .then(breed => res.send(breed))
+    .then(doc => res.send(doc))
     .catch(errNextr(next))
 })
 
