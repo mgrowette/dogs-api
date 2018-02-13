@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
-
+const { head, last, split, filter, pathOr } = require('ramda')
 const { getDoc, deleteDoc, createDog, jennifer } = require('./dal')
 
 app.use(bodyParser.json())
@@ -31,6 +31,18 @@ app.get('/dogs/:id', (req, res, next) => {
 })
 
 app.get('/dogs', (req, res, next) => {
+  var filterFn = null
+
+  if (pathOr(null, ['query', 'q'], req)) {
+    const filterProp = head(split(':', req.query.q)) // age
+    const filterValue = last(split(':', req.query.q)) // 65
+
+    filterFn = docs =>
+      res.status(200).send(filter(doc => doc[filterProp] == filterValue, docs))
+  } else {
+    filterFn = docs => res.status(200).send(docs)
+  }
+
   const options = {
     include_docs: true,
     start_key: 'dog_',
@@ -38,7 +50,7 @@ app.get('/dogs', (req, res, next) => {
   }
 
   jennifer(options)
-    .then(docs => res.send(docs))
+    .then(filterFn)
     .catch(errNextr(next))
 })
 
@@ -93,6 +105,7 @@ app.delete('/breeds/:id', (req, res, next) => {
 // })
 
 app.use(function(err, req, res, next) {
+  console.log('API err', err)
   res.status(err.status || 500).send(err.message)
 })
 
