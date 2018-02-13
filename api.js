@@ -5,7 +5,7 @@ const app = express()
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 
-const { getDoc, deleteDoc, createDog } = require('./dal')
+const { getDoc, deleteDoc, createDog, jennifer } = require('./dal')
 
 app.use(bodyParser.json())
 
@@ -28,6 +28,14 @@ app.get('/dogs/:id', (req, res, next) => {
   getDoc(req.params.id)
     .then(dog => res.send(dog))
     .catch(errNextr(next))
+})
+
+app.get('/dogs', (req, res, next) => {
+  const options = { include_docs: true }
+
+  jennifer(options)
+    .then(docs => res.send(docs))
+    .catch(err => errNextr(next))
 })
 
 app.get('/breeds/:id', (req, res, next) => {

@@ -110,7 +110,7 @@ db
       color: 'brown',
       breedId: 'breed_pug',
       type: 'dog',
-      _id: 'dog_Gladys'
+      _id: 'dog_gladys'
     },
     {
       name: 'Dash',
