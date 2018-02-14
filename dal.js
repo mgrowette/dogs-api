@@ -4,7 +4,7 @@ PouchDB.plugin(require('pouchdb-adapter-http'))
 PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB(process.env.COUCHDB_URL)
 const slugster = require('slugify')
-const { pluck } = require('ramda')
+const { pluck, prop } = require('ramda')
 // const getDog = (id, cb) => db.get(id, cb)
 // const getBreed = (id, cb) => db.get(id, cb)
 
@@ -23,4 +23,14 @@ const createDog = doc => {
 const allDocs = options =>
   db.allDocs(options).then(result => pluck('doc', result.rows))
 
-module.exports = { getDoc, deleteDoc, createDog, allDocs }
+/*
+query param example:
+{
+  selector: { color: { $eq: 'brown' } }
+}
+*/
+//const findDocs = query => db.find(query).then(result => prop('docs',result))
+
+const findDocs = query => db.find(query).then(result => result.docs)
+
+module.exports = { getDoc, deleteDoc, createDog, allDocs, findDocs }

@@ -5,7 +5,7 @@ const app = express()
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const { head, last, split, filter, pathOr } = require('ramda')
-const { getDoc, deleteDoc, createDog, allDocs } = require('./dal')
+const { getDoc, deleteDoc, createDog, allDocs, findDocs } = require('./dal')
 const docFilter = require('./lib/doc-filter')
 app.use(bodyParser.json())
 
@@ -31,14 +31,36 @@ app.get('/dogs/:id', (req, res, next) => {
 })
 
 app.get('/dogs', (req, res, next) => {
-  const options = {
-    include_docs: true,
-    start_key: 'dog_',
-    end_key: 'dog_\ufff0'
+  var query = {}
+
+  // var query = {
+  //   selector: { color: { $eq: 'brown' } }
+  // }
+
+  if (pathOr(null, ['query', 'filter'], req)) {
+    //  req.query.filter =>  "color:brown"
+
+    const propKey = head(split(':', req.query.filter)) // color
+    const propValue = last(split(':', req.query.filter)) // brown
+
+    var selectorStuff = {}
+    selectorStuff[propKey] = propValue // {color: 'brown'}
+
+    query = {
+      selector: selectorStuff
+    }
+
+    // var query = {
+    //   selector: { color: 'brown'  }
+    // }
+  } else {
+    query = {
+      selector: { type: 'dog' }
+    }
   }
 
-  allDocs(options)
-    .then(docFilter(req, res))
+  findDocs(query)
+    .then(docs => res.send(docs))
     .catch(errNextr(next))
 })
 
