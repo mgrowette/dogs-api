@@ -4,23 +4,23 @@ PouchDB.plugin(require('pouchdb-adapter-http'))
 PouchDB.plugin(require('pouchdb-find'))
 const db = new PouchDB(process.env.CLOUDANT_COUCHDB_URL)
 
-const indexLoggerer = msg => err => console.log(msg, err)
+//const indexLoggerer = msg => err => console.log(msg, err)
 
 db
   .createIndex({
     index: { fields: ['type'] }
   })
   .then(() => console.log('document type index created.'))
-  .catch(indexLoggerer('error creating index on type'))
+  .catch(err => console.log('error creating type index', err))
 
 db
   .createIndex({
     index: { fields: ['name'] }
   })
   .then(() => console.log('dog name index created.'))
-  .catch(indexLoggerer('error creating index on name'))
+  .catch(err => console.log('error creating name index', err))
 
 db
   .createIndex({ index: { fields: ['age'] } })
   .then(() => console.log('dog age index created.'))
-  .catch(indexLoggerer('error creating index on age'))
+  .catch(err => console.log('error creating age index', err))
