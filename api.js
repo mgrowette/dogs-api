@@ -5,7 +5,7 @@ const app = express()
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const { head, last, split, filter, pathOr } = require('ramda')
-const { getDoc, deleteDoc, createDog, jennifer } = require('./dal')
+const { getDoc, deleteDoc, createDog, allDocs } = require('./dal')
 const docFilter = require('./lib/doc-filter')
 app.use(bodyParser.json())
 
@@ -37,7 +37,7 @@ app.get('/dogs', (req, res, next) => {
     end_key: 'dog_\ufff0'
   }
 
-  jennifer(options)
+  allDocs(options)
     .then(docFilter(req, res))
     .catch(errNextr(next))
 })
@@ -48,7 +48,7 @@ app.get('/breeds', (req, res, next) => {
     start_key: 'breed_',
     end_key: 'breed_\ufff0'
   }
-  jennifer(options)
+  allDocs(options)
     .then(docFilter(req, res))
     .catch(err => errNextr(next))
 })
